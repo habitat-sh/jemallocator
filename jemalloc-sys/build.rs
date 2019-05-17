@@ -221,11 +221,15 @@ fn main() {
 
     if env::var("JEMALLOC_SYS_DISABLE_STATIC").is_ok() {
         cmd.arg("--disable-static");
-    };
+    } else if env::var("JEMALLOC_SYS_ENABLE_STATIC").is_ok() {
+        cmd.arg("--enable-static");
+    }
 
     if env::var("JEMALLOC_SYS_DISABLE_SHARED").is_ok() {
         cmd.arg("--disable-shared");
-    };
+    } else if env::var("JEMALLOC_SYS_ENABLE_SHARED").is_ok() {
+        cmd.arg("--enable-shared");
+    }
 
     if target.contains("ios") {
         // newer iOS deviced have 16kb page sizes:
